@@ -1,0 +1,270 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using Dapper;
+using Microsoft.Extensions.Configuration;
+using MISA.Fresher.Core.Interfaces.Repository;
+using MISA.Fresher.Core.MISAAttributes;
+using MySqlConnector;
+
+namespace MISA.Fresher.Infrastructure.Repositories
+{
+    /// <summary>
+    /// Base Repository triển khai các nghiệp vụ truy vấn cơ sở dữ liệu chung (CRUD) cho mọi Entity.
+    /// Sử dụng Dapper và MySQL.
+    /// </summary>
+    /// <typeparam name="T">Kiểu Entity</typeparam>
+    /// Created by: HoanTD (10/12/2025)
+    public class BaseRepository<T> : IBaseRepository<T>, IDisposable where T : class
+    {
+        /// <summary>
+        /// Chuỗi kết nối đến cơ sở dữ liệu.
+        /// </summary>
+        protected readonly string connectionString;
+
+        /// <summary>
+        /// Đối tượng kết nối cơ sở dữ liệu.
+        /// </summary>
+        protected IDbConnection dbConnection;
+
+        /// <summary>
+        /// Khởi tạo repository với cấu hình kết nối database
+        /// </summary>
+        /// <param name="configuration">Cấu hình ứng dụng chứa chuỗi kết nối</param>
+        /// Created by: HoanTD (10/12/2025)
+        public BaseRepository(IConfiguration configuration)
+        {
+            connectionString = configuration.GetConnectionString("DefaultConnection");
+            dbConnection = new MySqlConnection(connectionString);
+        }
+
+        /// <summary>
+        /// Kiểm tra trùng lặp giá trị của cột trong cơ sở dữ liệu.
+        /// </summary>
+        /// <param name="columnName">Tên cột cần kiểm tra (tên cột DB)</param>
+        /// <param name="value">Giá trị cần kiểm tra</param>
+        /// <param name="excludeId">ID cần loại trừ khi kiểm tra (dùng khi update). Nếu null/empty, sẽ kiểm tra cho Create</param>
+        /// <returns>True nếu giá trị đã tồn tại, False nếu chưa tồn tại</returns>
+        /// Created by: HoanTD (10/12/2025)
+        public async Task<bool> CheckDuplicateAsync(string columnName, object value, string? excludeId = null)
+        {
+            // Lấy tên bảng từ attribute MISATableName hoặc dùng tên Entity viết thường
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
+
+            // Xây dựng câu lệnh SQL
+            var sqlCommand = !string.IsNullOrEmpty(excludeId)
+                ? $"SELECT COUNT(*) FROM {tableName} WHERE {columnName} = @Value AND {tableName}_code != @ExcludeId"
+                : $"SELECT COUNT(*) FROM {tableName} WHERE {columnName} = @Value";
+
+            // Thực thi truy vấn
+            var count = await dbConnection.ExecuteScalarAsync<int>(sqlCommand, new
+            {
+                Value = value,
+                ExcludeId = excludeId // Dapper sẽ bỏ qua tham số này nếu không được dùng trong SQL
+            });
+
+            return count > 0;
+        }
+
+        /// <summary>
+        /// Tạo mới một bản ghi vào cơ sở dữ liệu.
+        /// Sử dụng Reflection để ánh xạ tất cả các thuộc tính Entity sang cột DB và tạo câu lệnh INSERT.
+        /// </summary>
+        /// <param name="entity">Đối tượng cần tạo</param>
+        /// <returns>Đối tượng đã được tạo (có thể bao gồm các trường được DB tự động sinh)</returns>
+        /// Created by: HoanTD (10/12/2025)
+        public async Task<T> CreateAsync(T entity)
+        {
+            var properties = typeof(T).GetProperties();
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
+            var columns = new StringBuilder();
+            var columnParams = new StringBuilder();
+            var parameters = new DynamicParameters();
+
+            // Xây dựng danh sách cột và tham số
+            foreach (var prop in properties)
+            {
+                var columnAttr = prop.GetCustomAttribute<MISAColumnName>();
+                var columnName = columnAttr != null ? columnAttr.ColumnName : prop.Name.ToLower();
+
+                columns.Append($"{columnName}, ");
+                columnParams.Append($"@{prop.Name}, ");
+                parameters.Add($"@{prop.Name}", prop.GetValue(entity));
+            }
+
+            var columnsString = columns.ToString().TrimEnd(',', ' ');
+            var columnParamsString = columnParams.ToString().TrimEnd(',', ' ');
+
+            var sqlCommand = $"INSERT INTO {tableName} ({columnsString}) VALUES ({columnParamsString})";
+
+            await dbConnection.ExecuteAsync(sqlCommand, parameters);
+
+            return entity;
+        }
+
+        /// <summary>
+        /// Xóa bản ghi theo ID (Hard Delete).
+        /// </summary>
+        /// <param name="id">ID của bản ghi cần xóa (dùng cho trường {TableName}_id)</param>
+        /// <returns>Số bản ghi bị xóa</returns>
+        /// Created by: HoanTD (10/12/2025)
+        public async Task<int> DeleteAsync(string id)
+        {
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
+
+            // Giả định khóa chính có tên là {tableName}_id
+            var sqlCommand = $"DELETE FROM {tableName} WHERE {tableName}_id = @Id";
+
+            var result = await dbConnection.ExecuteAsync(sqlCommand, new { Id = id });
+
+            return result;
+        }
+
+        /// <summary>
+        /// Xóa nhiều bản ghi theo danh sách ID (Hard Delete).
+        /// </summary>
+        /// <param name="ids">Danh sách ID cần xóa</param>
+        /// <returns>Số bản ghi bị xóa</returns>
+        /// Created by: HoanTD (10/12/2025)
+        public async Task<int> DeleteMultipleAsync(List<string> ids)
+        {
+            if (ids == null || ids.Count == 0)
+            {
+                return 0;
+            }
+
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
+
+            // Sử dụng tham số DynamicParameters để truyền danh sách ID
+            var parameters = new DynamicParameters();
+            var paramNames = new List<string>();
+
+            for (int i = 0; i < ids.Count; i++)
+            {
+                var paramName = $"@Id{i}";
+                paramNames.Add(paramName);
+                parameters.Add(paramName, ids[i]);
+            }
+
+            // Giả định khóa chính có tên là {tableName}_id
+            var sqlCommand = $"DELETE FROM {tableName} WHERE {tableName}_id IN ({string.Join(",", paramNames)})";
+
+            var result = await dbConnection.ExecuteAsync(sqlCommand, parameters);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Giải phóng tài nguyên kết nối database (thực hiện theo pattern IDisposable)
+        /// </summary>
+        /// Created by: HoanTD (05/12/2025)
+        public void Dispose()
+        {
+            dbConnection?.Dispose();
+        }
+
+        /// <summary>
+        /// Lấy tất cả bản ghi với khả năng tìm kiếm theo từ khóa.
+        /// Chú ý: Hiện tại hardcode cột tìm kiếm là 'asset_code' và 'asset_name'. Cần xem xét cập nhật BaseRepository.
+        /// </summary>
+        /// <param name="keyword">Từ khóa tìm kiếm (có thể null)</param>
+        /// <returns>Danh sách các bản ghi</returns>
+        /// Created by: HoanTD (05/12/2025)
+        public async Task<IEnumerable<T>> GetAllAsync(string? keyword)
+        {
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
+
+            var parameters = new DynamicParameters();
+
+            var whereClauses = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                // NOTE: Logic tìm kiếm này đang bị hardcode cột ('asset_code' và 'asset_name'), 
+                // cần được tùy chỉnh cho Entity T hoặc chuyển sang Repository cụ thể.
+                whereClauses.Add("(asset_code LIKE @Keyword OR asset_name LIKE @Keyword)");
+                parameters.Add("@Keyword", $"%{keyword}%");
+            }
+
+            var whereClause = whereClauses.Count > 0 ? " WHERE " + string.Join(" AND ", whereClauses) : "";
+
+            var sqlCommand = $@"SELECT * FROM {tableName}{whereClause}";
+
+            var data = await dbConnection.QueryAsync<T>(sqlCommand, parameters);
+
+            return data;
+        }
+
+        /// <summary>
+        /// Lấy bản ghi theo ID.
+        /// </summary>
+        /// <param name="id">ID của bản ghi</param>
+        /// <returns>Bản ghi tìm được hoặc null nếu không tồn tại</returns>
+        /// Created by: HoanTD (05/12/2025)
+        public async Task<T?> GetByIdAsync(string id)
+        {
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
+
+            // Giả định khóa chính có tên là {tableName}_id
+            var sqlCommand = $"SELECT * FROM {tableName} WHERE {tableName}_id = @Id";
+
+            var result = await dbConnection.QueryFirstOrDefaultAsync<T>(sqlCommand, new { Id = id });
+
+            return result;
+        }
+
+        /// <summary>
+        /// Cập nhật thông tin bản ghi.
+        /// Sử dụng Reflection để ánh xạ các thuộc tính trừ Key và tạo câu lệnh UPDATE.
+        /// </summary>
+        /// <param name="id">ID của bản ghi cần cập nhật</param>
+        /// <param name="entity">Đối tượng chứa thông tin mới</param>
+        /// <returns>Số bản ghi bị ảnh hưởng</returns>
+        /// Created by: HoanTD (05/12/2025)
+        public Task<int> UpdateAsync(string id, T entity)
+        {
+            var properties = typeof(T).GetProperties();
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
+            var setClause = new StringBuilder();
+            var parameters = new DynamicParameters();
+
+            // Xây dựng setClause
+            foreach (var prop in properties)
+            {
+                // Bỏ qua thuộc tính được đánh dấu là Key (thường là ID)
+                if (prop.GetCustomAttribute<MISAKey>() != null)
+                {
+                    continue;
+                }
+
+                var columnAttr = prop.GetCustomAttribute<MISAColumnName>();
+                // Nếu có MISAColumnName, dùng tên cột DB; nếu không, dùng tên thuộc tính C#
+                var columnName = columnAttr != null ? columnAttr.ColumnName : prop.Name;
+
+                setClause.Append($"{columnName} = @{prop.Name},");
+                parameters.Add($"@{prop.Name}", prop.GetValue(entity));
+            }
+
+            var setClauseString = setClause.ToString().TrimEnd(',');
+
+            // Giả định khóa chính có tên là {tableName}_id
+            var sqlCommand = $"UPDATE {tableName} SET {setClauseString} WHERE {tableName}_id = @Id";
+            parameters.Add("@Id", id);
+
+            var result = dbConnection.ExecuteAsync(sqlCommand, parameters);
+
+            return result;
+        }
+    }
+}

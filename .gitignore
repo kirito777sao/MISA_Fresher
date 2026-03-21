@@ -52,3 +52,86 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# ========================
+# Node / Vue.js
+# ========================
+node_modules/
+dist/
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vite/
+
+# Optional IDE / editor files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
+
+# ========================
+# Logs
+# ========================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========================
+# C# / .NET
+# ========================
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.pidb
+*.svclog
+*.pdb
+*.opendb
+*.VC.db
+*.VC.opendb
+
+# Auto-generated files
+Generated\ Files/
+TestResults/
+*.cache
+*.vs/
+*.DotSettings.user
+
+# Publish / package folders
+*.Publish.xml
+*.nupkg
+*.nuspec
+*.dll
+*.exe
+*.appx
+*.appxbundle
+*.vsix
+*.xap
+
+# ========================
+# OS generated files
+# ========================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ========================
+# Other
+# ========================
+*.env
+
+rule.txt

@@ -1,0 +1,404 @@
+/* Icon size */
+.icon-12 {
+          width: 12px;
+          height: 12px;
+}
+
+.icon-16 {
+          width: 16px;
+          height: 16px;
+}
+
+.icon-20 {
+          width: 20px;
+          height: 20px;
+}
+
+.icon-24 {
+          width: 24px;
+          height: 24px;
+}
+
+.icon-28 {
+          width: 28px;
+          height: 28px;
+}
+
+.icon-30 {
+          width: 30px;
+          height: 30px;
+}
+
+.icon-32 {
+          width: 32px;
+          height: 32px;
+}
+
+/* Icons */
+.icon_menu {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: 0px -36px;
+          background-color: #4b5563;
+}
+
+.icon_logo {
+          background-image: url("../icons/logo.svg");
+          background-repeat: no-repeat;
+          background-size: contain;
+}
+
+.icon_dropdown {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -31px 0px;
+          background-color: #4b5563;
+}
+
+.icon_download-status {
+          mask-image: url("../icons/ICON_Tool.svg");
+          mask-repeat: no-repeat;
+          mask-position: -744px -36px;
+          background-color: #4b5563;
+}
+
+.icon_package {
+          background-image: url("../icons/package.svg");
+          background-repeat: no-repeat;
+          background-size: contain;
+}
+
+.icon_invite-box {
+          background-image: url("../icons/invite-box.svg");
+          background-repeat: no-repeat;
+          background-size: contain;
+}
+
+.icon_bell {
+          mask-image: url("../icons/ICON_Tool.svg");
+          mask-repeat: no-repeat;
+          mask-position: -24px -36px;
+          background-color: #4b5563;
+}
+
+.icon_question-circle {
+          mask-image: url("../icons/ICON_Tool.svg");
+          mask-repeat: no-repeat;
+          mask-position: -48px -36px;
+          background-color: #4b5563;
+}
+
+.icon_dots-circle-horizontal {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -8px -428px;
+          background-color: #4b5563;
+}
+
+.icon_knowledge-trigger {
+          background-image: url("../icons/knowledge-trigger.svg");
+          background-repeat: no-repeat;
+          background-size: contain;
+}
+
+.icon_dashboard {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -6px -7px;
+          background-color: #9ca3af;
+}
+
+.icon_order {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -344px -86px;
+          background-color: #9ca3af;
+}
+
+.icon_plan {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -32px -7px;
+          background-color: #9ca3af;
+}
+
+.icon_coordinate {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -57px -7px;
+          background-color: #9ca3af;
+}
+
+.icon_quality-control {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -110px -6px;
+          background-color: #9ca3af;
+}
+
+.icon_material-factory {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -84px -6px;
+          background-color: #9ca3af;
+}
+
+.icon_production-report {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -214px -7px;
+          background-color: #9ca3af;
+}
+
+.icon_product-material {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -136px -6px;
+          background-color: #9ca3af;
+}
+
+.icon_process {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -162px -6px;
+          background-color: #9ca3af;
+}
+
+.icon_production-capacity {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -189px -6px;
+          background-color: #9ca3af;
+}
+
+.icon_production-category {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -240px -6px;
+          background-color: #9ca3af;
+}
+
+.icon_production-system {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -266px -6px;
+          background-color: #9ca3af;
+}
+
+.icon_dropdown-down {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -200px -16px;
+          background-color: #9ca3af;
+}
+
+.icon_arrow-down-right {
+          mask-image: url("../icons/ICON_qtsx.svg");
+          mask-repeat: no-repeat;
+          mask-position: -58px -67px;
+          background-color: #111827;
+}
+
+.icon_arrow-right {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -220px -16px;
+          background-color: #9ca3af;
+}
+
+.icon_collapse {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -140px -17px;
+          background-color: #9ca3af;
+}
+
+.icon_add-white {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -80px 0px;
+          background-color: #fff;
+}
+
+.icon_step-backward {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -143px 0px;
+          background-color: #4b5563;
+}
+
+.icon_step-forward {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -160px 0px;
+          background-color: #4b5563;
+}
+
+.icon_angle-left {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -48px 0px;
+          background-color: #4b5563;
+}
+
+.icon_angle-right {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -64px 0px;
+          background-color: #4b5563;
+}
+
+.icon_angle-down {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -201px -18px;
+          background-color: #9ca3af;
+}
+
+.icon_search {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: 0px 0px;
+          background-color: #4b5563;
+}
+
+.icon_reload {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -112px 0px;
+          background-color: #4b5563;
+}
+
+.icon_filter--default {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -544px 0px;
+          background-color: #4b5563;
+}
+
+.icon_filter--active {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -720px 0px;
+          background-color: #4b5563;
+}
+
+.icon_pencil {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -272px 0px;
+          background-color: #4b5563;
+}
+
+.icon_feature-more {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -288px 0px;
+          background-color: #4b5563;
+}
+
+.icon_empty {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -176px 0px;
+          background-color: #4b5563;
+}
+
+.icon_inactive {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -176px 0px;
+          background-color: #dc2626;
+}
+
+.icon_arrow-up {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -512px 0px;
+          background-color: #4b5563;
+}
+
+.icon_arrow-down {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -528px 0px;
+          background-color: #4b5563;
+}
+
+.icon_pin {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -432px 0px;
+          background-color: #4b5563;
+}
+
+.icon_unpin {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -592px 0px;
+          background-color: #4b5563;
+}
+
+.icon_close {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -94px 2px;
+          background-color: #4b5563;
+}
+
+.icon_help {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -279px -15px;
+          background-color: #4b5563;
+}
+
+.icon_duplicate {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -224px 0px;
+          background-color: #4b5563;
+}
+
+.icon_active {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -192px 0px;
+          background-color: #4b5563;
+}
+
+.icon_active--green {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -192px 0px;
+          background-color: #16a34a;
+}
+
+.icon_trash {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -208px 0px;
+          background-color: #dc2626;
+}
+
+.icon_warning {
+          mask-image: url("../icons/ICON_Warehouse.svg");
+          mask-repeat: no-repeat;
+          mask-position: -188px -169px;
+          background-color: #ea580c;
+}
+
+.icon_time {
+          mask-image: url("../icons/time.svg");
+          mask-repeat: no-repeat;
+          background-color: #4b5563;
+}
+
+.icon_select-checked {
+          width: 10px;
+          height: 5.67px;
+          border-width: 0 0 1px 1px;
+          border-style: solid;
+          border-color: #009b71;
+          transform: translateY(-2px) rotate(-45deg);
+}
