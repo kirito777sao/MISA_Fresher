@@ -45,6 +45,35 @@ Các tính năng chính:
 - SQL Server (cho backend)
 - Visual Studio 2022 / VS Code
 
+🧩 Chức năng chính
+📋 Danh sách ứng viên: hiển thị, phân trang, tìm kiếm nhanh.
+
+➕ Thêm ứng viên: popup nhập thông tin, lưu vào LocalStorage.
+
+✏️ Sửa ứng viên: bind dữ liệu, cập nhật LocalStorage.
+
+📦 LocalStorage: lưu trạng thái sidebar, dữ liệu ứng viên.
+
+🔔 Toast thông báo: hiển thị kết quả thao tác.
+
+💻 Công nghệ sử dụng
+Frontend: Vue 3, Vite, ESLint, Prettier
+
+Backend: ASP.NET Core 8, Entity Framework Core
+
+Database: SQL Server
+
+Version Control: Git, GitHub
+
+🤝 Đóng góp
+Fork repo
+
+Tạo branch mới: feature/my-feature
+
+Commit & push
+
+Tạo Pull Request
+
 ---
 
 ## ⚙️ Cài đặt
@@ -77,31 +106,3 @@ MISA_Fresher/
 │
 └── README.md
 
-🧩 Chức năng chính
-📋 Danh sách ứng viên: hiển thị, phân trang, tìm kiếm nhanh.
-
-➕ Thêm ứng viên: popup nhập thông tin, lưu vào LocalStorage.
-
-✏️ Sửa ứng viên: bind dữ liệu, cập nhật LocalStorage.
-
-📦 LocalStorage: lưu trạng thái sidebar, dữ liệu ứng viên.
-
-🔔 Toast thông báo: hiển thị kết quả thao tác.
-
-💻 Công nghệ sử dụng
-Frontend: Vue 3, Vite, ESLint, Prettier
-
-Backend: ASP.NET Core 8, Entity Framework Core
-
-Database: SQL Server
-
-Version Control: Git, GitHub
-
-🤝 Đóng góp
-Fork repo
-
-Tạo branch mới: feature/my-feature
-
-Commit & push
-
-Tạo Pull Request
