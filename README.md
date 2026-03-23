@@ -41,6 +41,7 @@ Các tính năng chính:
 - MySQL (cho backend)
 - Visual Studio 2022 / VS Code
 
+---
 ##🧩 Chức năng chính
 📋 Danh sách ứng viên: hiển thị, phân trang, tìm kiếm nhanh.
 
@@ -52,6 +53,7 @@ Các tính năng chính:
 
 🔔 Toast thông báo: hiển thị kết quả thao tác.
 
+---
 ##💻 Công nghệ sử dụng
 Frontend: Vue 3, Vite, ESLint, Prettier
 
@@ -61,6 +63,7 @@ Database: MySQL
 
 Version Control: Git, GitHub
 
+---
 ##🤝 Đóng góp
 Fork repo
 
@@ -73,6 +76,7 @@ Tạo Pull Request
 ---
 
 ## Cấu trúc thư mục
+```bash
 MISA_Fresher/
 ├── MISA_Fresher_BE/
 │   ├── MISA.Fresher.Api/           # API controllers, Program.cs, appsettings.json
@@ -86,7 +90,7 @@ MISA_Fresher/
 │   └── package.json                # Dependencies
 │
 └── README.md
-
+---
 ## ⚙️ Cài đặt
 ```bash
 # Clone project
