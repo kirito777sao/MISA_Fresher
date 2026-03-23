@@ -42,7 +42,7 @@ Các tính năng chính:
 ## 🛠️ Yêu cầu môi trường
 - Node.js >= 18
 - .NET 8 SDK
-- SQL Server (cho backend)
+- MySQL (cho backend)
 - Visual Studio 2022 / VS Code
 
 🧩 Chức năng chính
@@ -61,7 +61,7 @@ Frontend: Vue 3, Vite, ESLint, Prettier
 
 Backend: ASP.NET Core 8, Entity Framework Core
 
-Database: SQL Server
+Database: MySQL
 
 Version Control: Git, GitHub
 
