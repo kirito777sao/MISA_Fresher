@@ -15,15 +15,11 @@ Phân hệ chính: **Ứng viên - AMIS Tuyển dụng**, hỗ trợ quản lý 
 ## 📚 Mục lục
 - [Giới thiệu](#-giới-thiệu)
 - [Yêu cầu môi trường](#-yêu-cầu-môi-trường)
-- [Cài đặt](#-cài-đặt)
-- [Cách sử dụng](#-cách-sử-dụng)
-- [Cấu trúc thư mục](#-cấu-trúc-thư-mục)
-- [Ảnh minh họa](#-ảnh-minh-họa)
 - [Chức năng chính](#-chức-năng-chính)
 - [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
 - [Đóng góp](#-đóng-góp)
-- [License](#-license)
-
+- [Cấu trúc thư mục](#-cấu-trúc-thư-mục)
+- [Cài đặt](#-cài-đặt)
 ---
 
 ## 📖 Giới thiệu
@@ -45,7 +41,7 @@ Các tính năng chính:
 - MySQL (cho backend)
 - Visual Studio 2022 / VS Code
 
-🧩 Chức năng chính
+##🧩 Chức năng chính
 📋 Danh sách ứng viên: hiển thị, phân trang, tìm kiếm nhanh.
 
 ➕ Thêm ứng viên: popup nhập thông tin, lưu vào LocalStorage.
@@ -56,7 +52,7 @@ Các tính năng chính:
 
 🔔 Toast thông báo: hiển thị kết quả thao tác.
 
-💻 Công nghệ sử dụng
+##💻 Công nghệ sử dụng
 Frontend: Vue 3, Vite, ESLint, Prettier
 
 Backend: ASP.NET Core 8, Entity Framework Core
@@ -65,7 +61,7 @@ Database: MySQL
 
 Version Control: Git, GitHub
 
-🤝 Đóng góp
+##🤝 Đóng góp
 Fork repo
 
 Tạo branch mới: feature/my-feature
@@ -75,6 +71,21 @@ Commit & push
 Tạo Pull Request
 
 ---
+
+## Cấu trúc thư mục
+MISA_Fresher/
+├── MISA_Fresher_BE/
+│   ├── MISA.Fresher.Api/           # API controllers, Program.cs, appsettings.json
+│   ├── MISA.Fresher.Core/          # Entities, DTOs, Services, Interfaces, Middlewares
+│   └── MISA.Fresher.Infrastructure # Repositories, Mappings
+│
+├── MISA_Fresher_FE/
+│   ├── src/                        # Vue components, pages, services
+│   ├── public/                     # Static assets
+│   ├── vite.config.js              # Vite config
+│   └── package.json                # Dependencies
+│
+└── README.md
 
 ## ⚙️ Cài đặt
 ```bash
@@ -91,18 +102,3 @@ npm run dev
 cd MISA_Fresher_BE/MISA.Fresher.Api
 dotnet restore
 dotnet run
-
-MISA_Fresher/
-├── MISA_Fresher_BE/
-│   ├── MISA.Fresher.Api/           # API controllers, Program.cs, appsettings.json
-│   ├── MISA.Fresher.Core/          # Entities, DTOs, Services, Interfaces, Middlewares
-│   └── MISA.Fresher.Infrastructure # Repositories, Mappings
-│
-├── MISA_Fresher_FE/
-│   ├── src/                        # Vue components, pages, services
-│   ├── public/                     # Static assets
-│   ├── vite.config.js              # Vite config
-│   └── package.json                # Dependencies
-│
-└── README.md
-
