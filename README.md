@@ -42,7 +42,7 @@ Các tính năng chính:
 - Visual Studio 2022 / VS Code
 
 ---
-##🧩 Chức năng chính
+## 🧩 Chức năng chính
 📋 Danh sách ứng viên: hiển thị, phân trang, tìm kiếm nhanh.
 
 ➕ Thêm ứng viên: popup nhập thông tin, lưu vào LocalStorage.
@@ -54,7 +54,7 @@ Các tính năng chính:
 🔔 Toast thông báo: hiển thị kết quả thao tác.
 
 ---
-##💻 Công nghệ sử dụng
+## 💻 Công nghệ sử dụng
 Frontend: Vue 3, Vite, ESLint, Prettier
 
 Backend: ASP.NET Core 8, Entity Framework Core
@@ -64,7 +64,7 @@ Database: MySQL
 Version Control: Git, GitHub
 
 ---
-##🤝 Đóng góp
+## 🤝 Đóng góp
 Fork repo
 
 Tạo branch mới: feature/my-feature
@@ -75,7 +75,7 @@ Tạo Pull Request
 
 ---
 
-## Cấu trúc thư mục
+## 📂 Cấu trúc thư mục
 ```bash
 MISA_Fresher/
 ├── MISA_Fresher_BE/
@@ -90,7 +90,9 @@ MISA_Fresher/
 │   └── package.json                # Dependencies
 │
 └── README.md
+```
 ---
+
 ## ⚙️ Cài đặt
 ```bash
 # Clone project
